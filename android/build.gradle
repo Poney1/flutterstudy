@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        maven {
+            url "http://nexus.sf-express.com/nexus/content/groups/public/"
+        }
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.2'
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url "http://nexus.sf-express.com/nexus/content/groups/public/"
+        }
+        google()
+        jcenter()
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
